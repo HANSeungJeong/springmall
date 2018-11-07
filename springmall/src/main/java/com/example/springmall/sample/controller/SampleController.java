@@ -36,6 +36,8 @@ public class SampleController {
 	public String removeSample(@RequestParam(value="sampleNo")int sampleNo) {
 		if(sampleService.removeSample(sampleNo)==1) {
 			System.out.println(sampleNo+"번 데이터 삭제성공");
+		} else {
+			System.out.println(sampleNo+"번 데이터 삭제실패");
 		}
 		return "redirect:/sample/sampleList";
 	}

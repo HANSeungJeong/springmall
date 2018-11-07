@@ -35,7 +35,7 @@ public class SampleService {
 	//2
 	public int removeSample(int sampleNo) {
 		
-		//return sampleMapper.deleteSample(sampleNo);
-		return 1;
+		return sampleMapper.deleteSample(sampleNo);
+		
 	}
 }

@@ -19,4 +19,9 @@
 	 	 	FROM jjdev.sample
 	 	 	ORDER BY sampleNo DESC LIMIT #{startRow}, #{pagePerRow}
  	 </select>
+ 	 <delete id="deleteSample">
+ 	 	DELETE
+ 	 		FROM jjdev.sample
+ 	 		WHERE sample_No = #{sampleNo}
+ 	 </delete>
 </mapper>
