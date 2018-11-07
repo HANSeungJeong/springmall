@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 
+	public > implemets com.example.springmall.MemberMapper{
+	
+	}
+ -->
+ <mapper namespace="com.example.springmall.sample.mapper.SampleMapper">
+ 	<select id="selectSampleAllCount" resultType="int">
+ 		SELECT 
+ 			COUNT(*) 
+ 			FROM jjdev.sample
+ 	</select>
+ 	 <select id="selectSampleAll" resultType="com.example.springmall.sample.vo.Sample" parameterType="HashMap">
+ 	 	SELECT
+	 	 	sample_No as sampleNo, sample_Id as sampleId, sample_Pw as samplePw 
+	 	 	FROM jjdev.sample
+	 	 	ORDER BY sampleNo DESC LIMIT #{startRow}, #{pagePerRow}
+ 	 </select>
+</mapper>
