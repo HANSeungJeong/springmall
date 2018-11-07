@@ -27,7 +27,7 @@
 			<tr>
 				<td>${sample.sampleNo}</td>
 				<td>${sample.sampleId}</td>
-				<td>${sample.samplePw}</td>
+				<td>${sample.samplePw}</td> 
 				<td><a href="/sample/removeSample?sampleNo=${sample.sampleNo}">DELETE</a></td>
 				<td><a href="/sample/modifySample?sampleNo=${sample.sampleNo}">UPDATE</a></td>
 			</tr>
