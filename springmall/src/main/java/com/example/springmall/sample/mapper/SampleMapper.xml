@@ -2,26 +2,42 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <!-- 
-	public > implemets com.example.springmall.MemberMapper{
-	
-	}
- -->
- <mapper namespace="com.example.springmall.sample.mapper.SampleMapper">
- 	<select id="selectSampleAllCount" resultType="int">
- 		SELECT 
- 			COUNT(*) 
- 			FROM jjdev.sample
- 	</select>
- 	 <select id="selectSampleAll" resultType="com.example.springmall.sample.vo.Sample" parameterType="HashMap">
- 	 	SELECT
-	 	 	sample_No as sampleNo, sample_Id as sampleId, sample_Pw as samplePw 
-	 	 	FROM jjdev.sample
-	 	 	ORDER BY sampleNo DESC LIMIT #{startRow}, #{pagePerRow}
- 	 </select>
- 	 <delete id="deleteSample">
- 	 	DELETE
- 	 		FROM jjdev.sample
- 	 		WHERE sample_No = #{sampleNo}
- 	 </delete>
+<!--
+    public OTHER_CLASS implements com.example.springmall.MemberMapper {
+    } 
+ -->  
+<mapper namespace="com.example.springmall.sample.mapper.SampleMapper">
+    <select id="selectSampleAllCount" resultType="int">
+        SELECT 
+            COUNT(*)
+           FROM jjdev.sample
+    </select>
+    <select id="selectSampleAll" resultType="com.example.springmall.sample.vo.Sample" parameterType="HashMap">
+        SELECT 
+            sample_No as sampleNo, sample_Id as sampleId, sample_Pw as samplePw 
+           FROM jjdev.sample
+           ORDER BY sampleNo DESC LIMIT #{startRow}, #{pagePerRow}
+    </select>
+    <delete id="deleteSample" parameterType="int">
+        DELETE
+           FROM jjdev.sample
+           WHERE sample_No = #{sampleNo}
+    </delete>
+    <insert id="insertSample" parameterType="com.example.springmall.sample.vo.Sample">
+        INSERT
+        INTO jjdev.sample
+            (sample_Id, sample_Pw)
+        VALUES (#{sampleId}, #{samplePw})
+    </insert>
+    <select id="selectOne" parameterType="int" resultType="com.example.springmall.sample.vo.Sample">
+        SELECT 
+            sample_No as sampleNo, sample_Id as sampleId, sample_Pw as samplePw 
+        FROM jjdev.sample
+        WHERE sample_No = #{sampleNo}
+    </select>
+    <update id="updateSample" parameterType="com.example.springmall.sample.vo.Sample">
+        UPDATE jjdev.sample 
+        SET sample_Id = #{sampleId}, sample_Pw = #{samplePw} 
+        WHERE sample_No = #{sampleNo}
+    </update>
 </mapper>

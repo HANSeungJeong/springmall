@@ -4,11 +4,10 @@ public class Sample {
 	private int sampleNo;
 	private String sampleId;
 	private String samplePw;
-	
+// 생성자---------
 	public Sample() {
 		super();
-		
-		
+
 	}
 	public Sample(int sampleNo, String sampleId, String samplePw) {
 		super();
@@ -16,6 +15,7 @@ public class Sample {
 		this.sampleId = sampleId;
 		this.samplePw = samplePw;
 	}
+//---------생성자 끝
 	public int getSampleNo() {
 		return sampleNo;
 	}

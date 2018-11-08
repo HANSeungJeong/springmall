@@ -1,16 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-		
 	<h1>sampleList</h1>
+	<div>
+		<a href="<%=request.getContextPath()%>/sample/addSample">
+		<button type="button">íšŒì›ê°€ì…</button>
+		</a>
+	</div>
+
 	<table class="table">
 		<thead>
 			<tr>
@@ -22,7 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<!--model¾ÈÀÇ sampleList¸¦ °¡Á®¿Í¼­ »ç¿ë  -->
+		<!--modelì•ˆì˜ sampleListë¥¼ ê°€ì ¸ì™€ì„œ ì‚¬ìš©  -->
 		<c:forEach var="sample" items="${sampleList}">
 			<tr>
 				<td>${sample.sampleNo}</td>
@@ -34,15 +38,17 @@
 		</c:forEach>
 		</tbody>
 	</table>
-	<c:if test="${currentPage > 1}">
-		<a href="<%=request.getContextPath()%>/sample/sampleList?currentPage=${currentPage-1}">
-			<button type="button">ÀÌÀü</button>
-		</a>
-	</c:if>
-	<c:if test="${currentPage < lastPage}">
-		<a href="<%=request.getContextPath()%>/sample/sampleList?currentPage=${currentPage+1}">
-			<button type="button">´ÙÀ½</button>
-		</a>
-	</c:if>
+	<div class="tect-center">
+		<c:if test="${currentPage > 1}">
+			<a href="<%=request.getContextPath()%>/sample/sampleList?currentPage=${currentPage-1}">
+				<button type="button">ì´ì „</button>
+			</a>
+		</c:if>
+		<c:if test="${currentPage < lastPage}">
+			<a href="<%=request.getContextPath()%>/sample/sampleList?currentPage=${currentPage+1}">
+				<button type="button">ë‹¤ìŒ</button>
+			</a>
+		</c:if>
+	</div>
 </body>
 </html>

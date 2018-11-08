@@ -25,6 +25,12 @@
 	</properties>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
 		
 		<dependency>
 		<!-- jsp 사용을 위한 의존성 추가 -->
