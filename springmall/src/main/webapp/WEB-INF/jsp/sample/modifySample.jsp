@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>modifySample.jsp</h1>
-	<form action="<%=request.getContextPath()%>/sample/modifySample" method="post">
+	<form action="${pageContext.request.contextPath}/sample/modifySample" method="post">
 	<input type="hidden" name="sampleNo" value="${sample.sampleNo}">
 	<table>
 		<tr>
@@ -21,7 +21,7 @@
 		</tr>
 	</table>
 	<div>
-		<a href="<%=request.getContextPath()%>/sample/sampleList">
+		<a href="${pageContext.request.contextPath}/sample/sampleList">
 		<button type="button">취소</button>
 		</a>
 		<input type="submit" value="회원수정">

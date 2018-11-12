@@ -2,6 +2,7 @@ package com.example.springmall.sample.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -96,12 +97,13 @@ public class SampleService {
 		}
 	
 	//1
-	public List<Sample> getSampleAll(PageMaker pageMaker){
+	public List<Sample> getSampleAll(HashMap<String, Object> map){
 		//페이징 관련 코드(set메서드 순서를 지켜야한다)
 		//페이징에서 기본적으로 넣어줘야 할 값을 설정
+		PageMaker pageMaker=(PageMaker)map.get("pageMaker");
 		pageMaker.setRowPerPage(10);
 		pageMaker.setPagePerBlock(10);
-		pageMaker.setAllCount(sampleMapper.selectSampleAllCount());
+		pageMaker.setAllCount(sampleMapper.selectSampleAllCount((String)map.get("searchWord")));
 		//페이징에 필요한 값을 계산하여 설정
 		pageMaker.setStartRow();
 		pageMaker.setLastPage();
@@ -120,7 +122,7 @@ public class SampleService {
 			pageMaker.setPrevPage(true);
 			pageMaker.setNextPage(true);			
 	}
-		return sampleMapper.selectSampleAll(pageMaker);		
+		return sampleMapper.selectSampleAll(map);		
 
 	}
 }

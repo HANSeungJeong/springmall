@@ -13,6 +13,10 @@
 		<a href="${pageContext.request.contextPath}/sample/addSample">
 		<button type="button">회원가입</button>
 		</a>
+	<form action="${pageContext.request.contextPath}/sample/sampleList" method="get">
+		<input type="text" name="searchWord" placeholder="검색" class="form-control">
+		<input type="submit" value="검색버튼">
+	</form>
 	</div>
 
 	<table class="table">
@@ -41,18 +45,18 @@
 	<div class="text-center">
 		<ul class="pagination justify-content-center">
 			<c:if test="${prevPage}">
-				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/sample/sampleList?currentPage=${(currentBlock - 1) * pagePerBlock}">< 이전</a></li>
+								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/sample/sampleList?searchWord=${searchWord}&currentPage=${(currentBlock - 1) * pagePerBlock}">< 이전</a></li>
 			</c:if>
 			<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
 				<c:if test="${currentPage == i}">
 					<li class="page-item"><a class="page-link" href="#">${i}</a></li>
 				</c:if>
 				<c:if test="${currentPage != i}">
-					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/sample/sampleList?currentPage=${i}">${i}</a></li>
+					<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/sample/sampleList?searchWord=${searchWord}&currentPage=${i}">${i}</a></li>
 				</c:if>
 			</c:forEach>
 			<c:if test="${nextPage}">
-				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/sample/sampleList?currentPage=${currentBlock * pagePerBlock + 1}">다음 ></a></li>
+				<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/sample/sampleList?searchWord=${searchWord}&currentPage=${currentBlock * pagePerBlock + 1}">다음 ></a></li>
 			</c:if>
 		</ul>
 	</div>

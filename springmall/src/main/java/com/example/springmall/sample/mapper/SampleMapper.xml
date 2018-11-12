@@ -7,16 +7,18 @@
     } 
  -->  
 <mapper namespace="com.example.springmall.sample.mapper.SampleMapper">
-    <select id="selectSampleAllCount" resultType="int">
+    <select id="selectSampleAllCount" resultType="int" parameterType="String">
         SELECT 
             COUNT(*)
            FROM jjdev.sample
+           WHERE sample_id LIKE #{searchWord} OR sample_pw LIKE #{searchWord}
     </select>
-    <select id="selectSampleAll" resultType="com.example.springmall.sample.vo.Sample" parameterType="com.example.springmall.sample.vo.PageMaker">
+    <select id="selectSampleAll" resultType="com.example.springmall.sample.vo.Sample" parameterType="HashMap">
         SELECT 
-            sample_No as sampleNo, sample_Id as sampleId, sample_Pw as samplePw 
-           FROM jjdev.sample
-           ORDER BY sampleNo DESC LIMIT #{startRow}, #{rowPerPage}
+           	sample_No as sampleNo, sample_Id as sampleId, sample_Pw as samplePw 
+          	FROM jjdev.sample
+         	WHERE sample_id LIKE #{searchWord} OR sample_pw LIKE #{searchWord}
+      		ORDER BY sampleNo DESC LIMIT #{pageMaker.startRow}, #{pageMaker.rowPerPage}
     </select>
     <delete id="deleteSample" parameterType="int">
         DELETE

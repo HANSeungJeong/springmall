@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>addSample</h1>
-	<form action="<%=request.getContextPath()%>/sample/addSample" method="post" enctype="multipart/form-data">
+	<form action="${pageContext.request.contextPath}/sample/addSample" method="post" enctype="multipart/form-data">
 	<table>
 		<tr>
 			<td>ID</td>
@@ -20,7 +20,7 @@
 		</tr>
 	</table>
 	<div>
-		<a href="<%=request.getContextPath()%>/sample/sampleList">
+		<a href="${pageContext.request.contextPath}/sample/sampleList">
 		<button type="button">취소</button>
 		</a>
 		<input type="submit" value="회원가입">
