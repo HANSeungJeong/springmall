@@ -4,6 +4,7 @@ public class Sample {
 	private int sampleNo;
 	private String sampleId;
 	private String samplePw;
+	private SampleFile sampleFile;
 // 생성자---------
 	public Sample() {
 		super();

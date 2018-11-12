@@ -12,11 +12,11 @@
             COUNT(*)
            FROM jjdev.sample
     </select>
-    <select id="selectSampleAll" resultType="com.example.springmall.sample.vo.Sample" parameterType="HashMap">
+    <select id="selectSampleAll" resultType="com.example.springmall.sample.vo.Sample" parameterType="com.example.springmall.sample.vo.PageMaker">
         SELECT 
             sample_No as sampleNo, sample_Id as sampleId, sample_Pw as samplePw 
            FROM jjdev.sample
-           ORDER BY sampleNo DESC LIMIT #{startRow}, #{pagePerRow}
+           ORDER BY sampleNo DESC LIMIT #{startRow}, #{rowPerPage}
     </select>
     <delete id="deleteSample" parameterType="int">
         DELETE

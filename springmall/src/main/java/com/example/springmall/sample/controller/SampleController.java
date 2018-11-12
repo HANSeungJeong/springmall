@@ -1,18 +1,19 @@
 package com.example.springmall.sample.controller;
 
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.springmall.sample.service.SampleService;
+import com.example.springmall.sample.vo.PageMaker;
 import com.example.springmall.sample.vo.Sample;
+import com.example.springmall.sample.vo.SampleRequest;
 
 @Controller
 /* @Controller는 Spring MVC의 Controller 클래스 선언을 단순화. 스프링 컨트롤러, 서블릿을 상속할 필요가 없으며, @Controller로 등록된 클래스 파일에 대한 bean을 자동으로 생성해준다
@@ -56,12 +57,13 @@ public class SampleController {
 	}
 	// 3-2. 입력 액션
 	@RequestMapping(value = "/sample/addSample", method = RequestMethod.POST)
-	public String addSample(Sample sample) { 
+	public String addSample(SampleRequest sampleRequest) { 
+		System.out.println("SampleREquest.multipartfile"+sampleRequest.getMultipartFile());
 		// 커맨드 객체 멤버 변수의 이름과 input태그 name의 이름이 같아야함, setter를 호출하므로 표준 setter가 필요하다.
-		if(sampleService.addSample(sample) == 1) {
-			System.out.println("ID:"+sample.getSampleId()+"인 데이터 추가 성공");
+		if(sampleService.addSample(sampleRequest) == 1) {
+			System.out.println("ID:"+sampleRequest.getSampleId()+"인 데이터 추가 성공");
 		} else {
-			System.out.println("ID:"+sample.getSampleId()+"인 데이터 추가 실패");
+			System.out.println("ID:"+sampleRequest.getSampleId()+"인 데이터 추가 실패");
 		}
 		return "redirect:/sample/sampleList";
 	}
@@ -77,15 +79,18 @@ public class SampleController {
 	}
 	//1. 샘플리스트
 	@RequestMapping(value="/sample/sampleList",method=RequestMethod.GET)
-	public String sampleList(Model model,@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage) {	//Model model = new Model();;
-		HashMap<String, Object> map=new HashMap<String, Object>();
-		map.put("currentPage", currentPage);
+	public String sampleList(Model model,PageMaker pageMaker,@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage) {	//Model model = new Model();;
+		pageMaker.setCurrentPage(currentPage);
 		System.out.println("currentPage:"+currentPage);
-		List<Sample> sampleList = sampleService.getSampleAll(map);
+		List<Sample> sampleList = sampleService.getSampleAll(pageMaker);
 		model.addAttribute("sampleList",sampleList);
 		model.addAttribute("currentPage",currentPage);
-		model.addAttribute("lastPage",(int)map.get("lastPage"));
-		System.out.println("lastPage:"+(int)map.get("lastPage"));
+		model.addAttribute("pagePerBlock", pageMaker.getPagePerBlock());
+		model.addAttribute("currentBlock", pageMaker.getCurrentBlock());
+		model.addAttribute("startPage", pageMaker.getStartPage());
+		model.addAttribute("endPage", pageMaker.getEndPage());
+		model.addAttribute("prevPage", pageMaker.isPrevPage());
+		model.addAttribute("nextPage", pageMaker.isNextPage());
 		return "/sample/sampleList";		
 	}	
 }

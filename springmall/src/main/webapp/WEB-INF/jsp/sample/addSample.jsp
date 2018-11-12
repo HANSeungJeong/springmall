@@ -8,13 +8,15 @@
 </head>
 <body>
 	<h1>addSample</h1>
-	<form action="<%=request.getContextPath()%>/sample/addSample" method="post">
+	<form action="<%=request.getContextPath()%>/sample/addSample" method="post" enctype="multipart/form-data">
 	<table>
 		<tr>
 			<td>ID</td>
 			<td><input type="text" name="sampleId"></td>
 			<td>PASSWORD</td>
 			<td><input type="password" name="samplePw"></td>
+			<td>File</td>
+			<td><input type="file" name="multipartFile"></td>
 		</tr>
 	</table>
 	<div>
