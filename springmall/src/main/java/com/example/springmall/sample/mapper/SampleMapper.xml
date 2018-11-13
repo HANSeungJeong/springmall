@@ -26,6 +26,9 @@
            WHERE sample_No = #{sampleNo}
     </delete>
     <insert id="insertSample" parameterType="com.example.springmall.sample.vo.Sample">
+        <selectKey resultType="int" keyProperty="sampleNo" order="AFTER">
+    		SELECT LAST_INSERT_ID()
+    	</selectKey>
         INSERT
         INTO jjdev.sample
             (sample_Id, sample_Pw)

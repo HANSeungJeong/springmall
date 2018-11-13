@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,12 +39,12 @@ public class SampleService {
 	}
 		
 	//3
-	public int addSample(SampleRequest sampleRequest) {
+	public int addSample(SampleRequest sampleRequest, HttpSession session) {
 		//1
 		Sample sample = new Sample();
 		sample.setSampleId(sampleRequest.getSampleId());
 		sample.setSamplePw(sampleRequest.getSamplePw());
-		sampleMapper.insertSample(sample);	//ai-> sampleNo
+		int insertSampleNum = sampleMapper.insertSample(sample);	//ai-> sampleNo
 		
 		//2
 		SampleFile sampleFile = new SampleFile();
@@ -52,32 +54,36 @@ public class SampleService {
 		//2.SampleNo
 		sampleFile.setSampleNo(sample.getSampleNo());	//insertSample(sample)후에 PK값에 sample값을 넣을수 있다.
 		//3.SampleFilePath
-		String path ="c:\\uploads";	//복잡한 루틴을 통해서
-		sampleFile.setSampleFilePath(path);
+		String sampleFilePath=session.getServletContext().getRealPath("\\WEB-INF\\uploads"); // 복잡한 루틴을 통해서
+		sampleFile.setSampleFilePath(sampleFilePath);
 		//4.확장자
 		System.out.println(multipartFile.getOriginalFilename());
 		String originalFileName = multipartFile.getOriginalFilename();
-		//이름,확장자
-		String ext = originalFileName.substring(0);
-		sampleFile.setSampleFileExt(ext);
+		String sampleFileExt = originalFileName.substring(multipartFile.getOriginalFilename().lastIndexOf(".") + 1); //
+		sampleFile.setSampleFileExt(sampleFileExt);
 		//5.이름
-		String filename = UUID.randomUUID().toString();
-		sampleFile.setSampleFileName(filename);
+		String sampleFileName = UUID.randomUUID().toString();
+		sampleFile.setSampleFileName(sampleFileName);
 		//sampleFileMapper.insertSampleFile(sampleFile);
 		//6.타입
 		sampleFile.setSampleFileType(multipartFile.getContentType());
 		//7.사이즈
 		sampleFile.setSampleFileSize(multipartFile.getSize());
-		//내가 원하는 이름의 비파일 하나를 만들자
-		File f = new File(path+"\\"+filename+"."+ext);
-		//mutipartFile 파일을 빈파일로 복사하자.
+		System.out.println(sampleFile);
+		int insertSampleFileNum = sampleFileMapper.insertSampleFile(sampleFile);
+		if(insertSampleFileNum == 1) {
+			System.out.println("originalFileName : " + originalFileName + "인 파일 추가 성공");
+		} else {
+			System.out.println("originalFileName : " + originalFileName + "인 파일 추가 실패");
+		}
 		try {
-			multipartFile.transferTo(f);
+			// 내가 원하는 이름의 빈파일 하나 만들어 multipartFile을 빈파일로 복사하자
+			multipartFile.transferTo(new File(sampleFilePath + "\\" + sampleFileName + "." + sampleFileExt));
 		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
+			System.out.println("IllegalStateException 발생");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("IOException 발생");
 			e.printStackTrace();
 		}
 		

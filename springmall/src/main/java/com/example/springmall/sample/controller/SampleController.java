@@ -3,6 +3,8 @@ package com.example.springmall.sample.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,10 +59,10 @@ public class SampleController {
 	}
 	// 3-2. 입력 액션
 	@RequestMapping(value = "/sample/addSample", method = RequestMethod.POST)
-	public String addSample(SampleRequest sampleRequest) { 
+	public String addSample(SampleRequest sampleRequest, HttpSession session) { 
 		System.out.println("SampleREquest.multipartfile"+sampleRequest.getMultipartFile());
 		// 커맨드 객체 멤버 변수의 이름과 input태그 name의 이름이 같아야함, setter를 호출하므로 표준 setter가 필요하다.
-		if(sampleService.addSample(sampleRequest) == 1) {
+		if(sampleService.addSample(sampleRequest, session) == 1) {
 			System.out.println("ID:"+sampleRequest.getSampleId()+"인 데이터 추가 성공");
 		} else {
 			System.out.println("ID:"+sampleRequest.getSampleId()+"인 데이터 추가 실패");

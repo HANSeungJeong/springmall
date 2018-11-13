@@ -62,5 +62,12 @@ public class SampleFile {
 	public void setSampleFileDate(String sampleFileDate) {
 		this.sampleFileDate = sampleFileDate;
 	}
+	@Override
+	public String toString() {
+		return "SampleFile [sampleFileNo=" + sampleFileNo + ", sampleNo=" + sampleNo + ", sampleFilePath="
+				+ sampleFilePath + ", sampleFileName=" + sampleFileName + ", sampleFileExt=" + sampleFileExt
+				+ ", sampleFileType=" + sampleFileType + ", sampleFileSize=" + sampleFileSize + ", sampleFileDate="
+				+ sampleFileDate + "]";
+	}
 	
 }
