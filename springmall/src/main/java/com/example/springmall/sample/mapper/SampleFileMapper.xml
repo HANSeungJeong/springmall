@@ -9,4 +9,13 @@
 			(sample_no, samplefile_path, samplefile_name, samplefile_ext, samplefile_type, samplefile_size, samplefile_date)
 		VALUES (#{sampleNo}, #{sampleFilePath}, #{sampleFileName}, #{sampleFileExt}, #{sampleFileType}, #{sampleFileSize}, now())
 	</insert>
+	<delete id="deleteSampleFile" parameterType="int">
+		DELETE FROM jjdev.samplefile WHERE sample_no = #{sampleNo}
+	</delete>
+	<select id="selectSampleFile" parameterType="int" resultType="com.example.springmall.sample.vo.SampleFile">
+		SELECT
+			samplefile_no as sampleFileNo, sample_no as sampleNo, samplefile_path as sampleFilePath, samplefile_name as sampleFileName, 
+	   		samplefile_ext as sampleFileExt, samplefile_type as sampleFileType, samplefile_size as sampleFileSize, samplefile_date as sampleFileDate
+	   	FROM jjdev.samplefile WHERE sample_no = #{sampleNo}
+	</select>
 </mapper> 

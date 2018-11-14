@@ -21,5 +21,5 @@ public interface SampleMapper {	//interface란? 추상메서드, 추상클래스
 	int updateSample(Sample sample);
 	
 	//5.select one
-	Sample selectOne(int sampleNo);
+	Sample selectOneSample(int sampleNo);
 }

@@ -63,7 +63,7 @@ public class SampleController {
 		System.out.println("SampleREquest.multipartfile"+sampleRequest.getMultipartFile());
 		// 커맨드 객체 멤버 변수의 이름과 input태그 name의 이름이 같아야함, setter를 호출하므로 표준 setter가 필요하다.
 		// 세션을 통해 상대경로를 받아와 sampleRequest에 넣어준다.
-		sampleRequest.setSampleFilePath(session.getServletContext().getRealPath("/WEB_INF/uploads/han/sj"));
+		sampleRequest.setSampleFilePath(session.getServletContext().getRealPath("\\WEB_INF\\uploads"));
 		if(sampleService.addSample(sampleRequest) == 1) {
 			System.out.println("ID:"+sampleRequest.getSampleId()+"인 데이터 추가 성공");
 		} else {
